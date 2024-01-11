@@ -31,6 +31,13 @@ namespace GDTestWork
       if (CurrentWeapon != null)
       {
         SetWeaponImages();
+      }
+    }
+
+    private void Update()
+    {
+      if (CurrentWeapon != null)
+      {
         DisplayWeaponCooldown();
       }
     }
@@ -61,9 +68,16 @@ namespace GDTestWork
 
     private void UpdateCooldownImage(Image cooldownImage, float currentCooldown, float maxCooldown)
     {
-      float fillAmount = Mathf.Clamp01(currentCooldown / maxCooldown);
+      if (maxCooldown > 0)
+      {
+        float fillAmount = Mathf.Clamp01(currentCooldown / maxCooldown);
 
-      cooldownImage.fillAmount = fillAmount;
+        cooldownImage.fillAmount = fillAmount;
+      }
+      else
+      {
+        cooldownImage.fillAmount = 1f;
+      }
     }
 
     private void UseWeaponAttackMain()
