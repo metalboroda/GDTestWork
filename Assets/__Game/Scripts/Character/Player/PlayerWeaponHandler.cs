@@ -32,6 +32,11 @@ namespace GDTestWork
       {
         SetWeaponImages();
       }
+      else
+      {
+        mainAttackImg.gameObject.SetActive(false);
+        superAttackImg.gameObject.SetActive(false);
+      }
     }
 
     private void Update()
@@ -56,7 +61,9 @@ namespace GDTestWork
 
     private void SetWeaponImages()
     {
+      mainAttackImg.gameObject.SetActive(true);
       mainAttackImg.sprite = CurrentWeapon.WeaponSO.DamageMainIcon;
+      superAttackImg.gameObject.SetActive(true);
       superAttackImg.sprite = CurrentWeapon.WeaponSO.DamageSuperIcon;
     }
 
