@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b953780c1f0c74b458e5ead8aa49d61c, type: 3}
   m_Name: AxeWeapon
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 0
+  <DamageMain>k__BackingField: 75
+  <DamageMainCooldown>k__BackingField: 0.5
+  <DamageMainIcon>k__BackingField: {fileID: 0}
+  <DamageSuper>k__BackingField: 75
+  <DamageSuperCooldown>k__BackingField: 2
+  <DamageSuperIcon>k__BackingField: {fileID: 0}

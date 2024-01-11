@@ -6,19 +6,17 @@ namespace GDTestWork
   public class Weapon : MonoBehaviour
   {
     [SerializeField] private WeaponSO weaponSO;
-
-    [Header("")]
     [SerializeField] private WeaponAnimSO weaponAnimSO;
 
     public List<string> AnimationNames { get; private set; } = new();
 
-    public LayerMask _enemyLayer;
-
-    //private List<GameObject> _attackedObjects = new();
+    private LayerMask _enemyLayer;
+    private int _currentDamage;
+    private float _mainAttackCooldownTimer;
+    private float _superAttackCooldownTimer;
 
     private CapsuleCollider _capsuleCollider;
     private Animator _characterAnimator;
-
     private CharacterWeaponHandler _characterWeaponHandler;
 
     private void Awake()
@@ -29,21 +27,22 @@ namespace GDTestWork
     private void Start()
     {
       _capsuleCollider.enabled = false;
-
       InitAnimNames();
+    }
+
+    private void Update()
+    {
+      _mainAttackCooldownTimer -= Time.deltaTime;
+      _superAttackCooldownTimer -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-      //if (_attackedObjects.Contains(other.gameObject) == true) return;
-
       if ((_enemyLayer.value & 1 << other.gameObject.layer) != 0)
       {
-        //_attackedObjects.Add(other.gameObject);
-
         if (other.TryGetComponent(out IDamageable damageable))
         {
-          damageable.Damage(weaponSO.Damage);
+          damageable.Damage(_currentDamage);
         }
       }
     }
@@ -58,21 +57,36 @@ namespace GDTestWork
     public void EnableCollider(bool enable)
     {
       _capsuleCollider.enabled = enable;
-
-      /*if (enable == false)
-      {
-        _attackedObjects.Clear();
-      }*/
     }
 
     public void AttackMain()
     {
-      _characterAnimator.CrossFadeInFixedTime(weaponAnimSO.AttackMain, 0.1f);
+      if (CanAttackMain())
+      {
+        _currentDamage = weaponSO.DamageMain;
+        _characterAnimator.CrossFadeInFixedTime(weaponAnimSO.AttackMain, 0.1f);
+        _mainAttackCooldownTimer = weaponSO.DamageMainCooldown;
+      }
     }
 
     public void AttackSuper()
     {
-      _characterAnimator.CrossFadeInFixedTime(weaponAnimSO.AttackSuper, 0.1f);
+      if (CanAttackSuper())
+      {
+        _currentDamage = weaponSO.DamageSuper;
+        _characterAnimator.CrossFadeInFixedTime(weaponAnimSO.AttackSuper, 0.1f);
+        _superAttackCooldownTimer = weaponSO.DamageSuperCooldown;
+      }
+    }
+
+    public bool CanAttackMain()
+    {
+      return _mainAttackCooldownTimer <= 0f;
+    }
+
+    public bool CanAttackSuper()
+    {
+      return _superAttackCooldownTimer <= 0f;
     }
 
     private void InitAnimNames()

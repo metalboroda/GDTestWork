@@ -38,22 +38,28 @@ namespace GDTestWork
     {
       if (characterController.StateMachine.CurrentState is not PlayerMovementState) return;
 
-      CurrentWeapon.AttackMain();
-      CurrentWeapon.EnableCollider(true);
-      characterController.StateMachine.ChangeState(new PlayerAttackingState(_playerController));
+      if (CurrentWeapon.CanAttackMain())
+      {
+        CurrentWeapon.AttackMain();
+        CurrentWeapon.EnableCollider(true);
+        characterController.StateMachine.ChangeState(new PlayerAttackingState(_playerController));
 
-      StartCoroutine(DoBackToMovementState());
+        StartCoroutine(DoBackToMovementState());
+      }
     }
 
     private void UseWeaponAttackSuper()
     {
       if (characterController.StateMachine.CurrentState is not PlayerMovementState) return;
 
-      CurrentWeapon.AttackSuper();
-      CurrentWeapon.EnableCollider(true);
-      characterController.StateMachine.ChangeState(new PlayerAttackingState(_playerController));
+      if (CurrentWeapon.CanAttackSuper())
+      {
+        CurrentWeapon.AttackSuper();
+        CurrentWeapon.EnableCollider(true);
+        characterController.StateMachine.ChangeState(new PlayerAttackingState(_playerController));
 
-      StartCoroutine(DoBackToMovementState());
+        StartCoroutine(DoBackToMovementState());
+      }
     }
 
     private IEnumerator DoBackToMovementState()
