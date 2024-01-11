@@ -1,11 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace GDTestWork
 {
   public class PlayerWeaponHandler : CharacterWeaponHandler
   {
+    [Header("UI")]
+    [SerializeField] private Image mainAttackImg;
+    [SerializeField] private Image mainCooldownImg;
+    [SerializeField] private Image superAttackImg;
+    [SerializeField] private Image superCooldownImg;
+
     private PlayerController _playerController;
 
     [Inject] private readonly InputManager _inputManager;
@@ -19,7 +26,13 @@ namespace GDTestWork
 
     private void Start()
     {
-      CurrentWeapon.Init(enemyLayer, characterController.CharacterAnimation.Animator, this);
+      CurrentWeapon.Init(enemyLayer, characterController.CharacterAnimation.Animator);
+
+      if (CurrentWeapon != null)
+      {
+        SetWeaponImages();
+        DisplayWeaponCooldown();
+      }
     }
 
     private void OnEnable()
@@ -32,6 +45,25 @@ namespace GDTestWork
     {
       _inputManager.AttackMainPressed -= UseWeaponAttackMain;
       _inputManager.AttackSuperPressed -= UseWeaponAttackSuper;
+    }
+
+    private void SetWeaponImages()
+    {
+      mainAttackImg.sprite = CurrentWeapon.WeaponSO.DamageMainIcon;
+      superAttackImg.sprite = CurrentWeapon.WeaponSO.DamageSuperIcon;
+    }
+
+    private void DisplayWeaponCooldown()
+    {
+      UpdateCooldownImage(mainCooldownImg, CurrentWeapon.MainAttackCooldownTimer, CurrentWeapon.WeaponSO.DamageMainCooldown);
+      UpdateCooldownImage(superCooldownImg, CurrentWeapon.SuperAttackCooldownTimer, CurrentWeapon.WeaponSO.DamageSuperCooldown);
+    }
+
+    private void UpdateCooldownImage(Image cooldownImage, float currentCooldown, float maxCooldown)
+    {
+      float fillAmount = Mathf.Clamp01(currentCooldown / maxCooldown);
+
+      cooldownImage.fillAmount = fillAmount;
     }
 
     private void UseWeaponAttackMain()

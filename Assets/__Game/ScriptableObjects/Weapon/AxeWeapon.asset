@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DamageMain>k__BackingField: 75
   <DamageMainCooldown>k__BackingField: 0.5
-  <DamageMainIcon>k__BackingField: {fileID: 0}
+  <DamageMainIcon>k__BackingField: {fileID: 21300000, guid: 7d2200b28d127d740935a4098eb418bd, type: 3}
   <DamageSuper>k__BackingField: 75
   <DamageSuperCooldown>k__BackingField: 2
-  <DamageSuperIcon>k__BackingField: {fileID: 0}
+  <DamageSuperIcon>k__BackingField: {fileID: 21300000, guid: 31b6d2b46be4a6a4284073ddad398329, type: 3}
