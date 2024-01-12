@@ -2867,8 +2867,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   <CrossDur>k__BackingField: 0.2
-  <MinAttackRate>k__BackingField: 1
-  <MaxAttackRate>k__BackingField: 2
+  <MinAttackRate>k__BackingField: 0.5
+  <MaxAttackRate>k__BackingField: 1.5
 --- !u!1 &5960858980640347997
 GameObject:
   m_ObjectHideFlags: 0
