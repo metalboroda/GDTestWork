@@ -7,6 +7,7 @@ namespace GDTestWork
     [SerializeField] private CharAnimSO _charAnimSO;
 
     [field: Header("Param's")]
+    [field: SerializeField] public float AnimatorSpeed { get; private set; } = 1f;
     [field: SerializeField] public float CrossDur { get; private set; } = 0.2f;
     [field: SerializeField] public float DampTime { get; private set; } = 0.1f;
 
@@ -15,6 +16,11 @@ namespace GDTestWork
     private void Awake()
     {
       Animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+      Animator.speed = AnimatorSpeed;
     }
 
     public void MovementAnim()

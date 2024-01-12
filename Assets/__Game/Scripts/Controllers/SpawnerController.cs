@@ -119,8 +119,6 @@ namespace GDTestWork
             var nextWaveSO = enemySpawnWaves[nextIndex];
 
             _spawnedEnemiesCount.Add(nextWaveSO, 0);
-
-            //Debug.Log($"Starting new wave: {nextWaveSO.name}");
           }
         }
 
@@ -128,8 +126,6 @@ namespace GDTestWork
         {
           _removedEnemiesCount = 0;
           _spawnedEnemiesCount.Add(enemySpawnWaves[0], 0);
-
-          //Debug.Log("Restarting from the first wave");
         }
       }
     }
