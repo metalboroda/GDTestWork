@@ -2,15 +2,27 @@ namespace GDTestWork
 {
   public class EnemyHandler : CharacterHandler
   {
+    private EnemyController _enemyController;
+
+    private void Awake()
+    {
+      _enemyController = GetComponent<EnemyController>();
+    }
+
+    private void Start()
+    {
+      CurrentHealth = Health;
+    }
+
     public override void Damage(int damage)
     {
-      Health -= damage;
+      CurrentHealth -= damage;
 
-      if (Health <= 0)
+      if (CurrentHealth <= 0)
       {
-        Health = 0;
+        CurrentHealth = 0;
 
-        Destroy(gameObject);
+        _enemyController.EnemyPool.ReturnObjectToPool(_enemyController);
       }
     }
   }

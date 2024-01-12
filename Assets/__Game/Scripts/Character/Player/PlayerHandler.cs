@@ -2,13 +2,18 @@ namespace GDTestWork
 {
   public class PlayerHandler : CharacterHandler
   {
+    private void Start()
+    {
+      CurrentHealth = Health;
+    }
+
     public override void Damage(int damage)
     {
-      Health -= damage;
+      CurrentHealth -= damage;
 
-      if (Health <= 0)
+      if (CurrentHealth <= 0)
       {
-        Health = 0;
+        CurrentHealth = 0;
 
         Destroy(gameObject);
       }
