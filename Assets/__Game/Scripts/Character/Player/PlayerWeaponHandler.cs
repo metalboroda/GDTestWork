@@ -7,11 +7,18 @@ namespace GDTestWork
 {
   public class PlayerWeaponHandler : CharacterWeaponHandler
   {
+    [Header("Enemy Detection")]
+    [SerializeField] private float detectionRadius = 5f;
+
     [Header("UI")]
     [SerializeField] private Image mainAttackImg;
+    [SerializeField] private Image mainAttackMouse;
     [SerializeField] private Image mainCooldownImg;
     [SerializeField] private Image superAttackImg;
+    [SerializeField] private Image superAttackMouse;
     [SerializeField] private Image superCooldownImg;
+
+    private bool _canSuperAttack;
 
     private PlayerController _playerController;
 
@@ -44,6 +51,7 @@ namespace GDTestWork
       if (CurrentWeapon != null)
       {
         DisplayWeaponCooldown();
+        DetectEnemies();
       }
     }
 
@@ -104,6 +112,7 @@ namespace GDTestWork
     override public void UseWeaponAttackSuper()
     {
       if (characterController.StateMachine.CurrentState is not PlayerMovementState) return;
+      if (_canSuperAttack == false) return;
 
       if (CurrentWeapon.CanAttackSuper())
       {
@@ -134,6 +143,26 @@ namespace GDTestWork
       yield return new WaitForSeconds(animLength - 0.25f);
 
       characterController.StateMachine.ChangeState(new PlayerMovementState(_playerController));
+    }
+
+    private void EnableSuperAttack(bool enable)
+    {
+      superAttackMouse.gameObject.SetActive(enable);
+      _canSuperAttack = enable;
+    }
+
+    private void DetectEnemies()
+    {
+      bool collisionDetected = Physics.CheckSphere(transform.position, detectionRadius, enemyLayer);
+
+      if (collisionDetected)
+      {
+        EnableSuperAttack(true);
+      }
+      else
+      {
+        EnableSuperAttack(false);
+      }
     }
   }
 }

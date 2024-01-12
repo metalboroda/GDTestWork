@@ -1018,8 +1018,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 124853279790643312}
   - {fileID: 6385022678292497165}
+  - {fileID: 124853279790643312}
   m_Father: {fileID: 5981366486904910748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -1444,9 +1444,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   <CrossDur>k__BackingField: 0.2
+  detectionRadius: 5
   mainAttackImg: {fileID: 3759398684372740463}
+  mainAttackMouse: {fileID: 9210899951905921533}
   mainCooldownImg: {fileID: 1890710474530573735}
   superAttackImg: {fileID: 4586200017854544418}
+  superAttackMouse: {fileID: 3239898728811230828}
   superCooldownImg: {fileID: 2897530287194902033}
 --- !u!1 &3377606184465454564
 GameObject:
@@ -2567,7 +2570,7 @@ GameObject:
   - component: {fileID: 8663223832093129045}
   - component: {fileID: 3239898728811230828}
   m_Layer: 0
-  m_Name: Mouse
+  m_Name: SuperAttackMouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3072,7 +3075,7 @@ GameObject:
   - component: {fileID: 2632356859721909248}
   - component: {fileID: 9210899951905921533}
   m_Layer: 0
-  m_Name: Mouse
+  m_Name: MainAttackMouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
