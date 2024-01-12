@@ -41,7 +41,6 @@ namespace GDTestWork
 
     public float GetNormalizedNavMeshAgentVelocity()
     {
-      // Ensure _navMeshAgent is not null
       if (_navMeshAgent != null)
       {
         float velocityMagnitude = _navMeshAgent.velocity.magnitude;

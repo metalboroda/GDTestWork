@@ -20,7 +20,7 @@ namespace GDTestWork
 
     public bool Chasing(Transform target, NavMeshAgent navMeshAgent)
     {
-      bool chasing = true;
+      bool chasing;
 
       if (Vector3.Distance(navMeshAgent.transform.position, target.position) <= navMeshAgent.stoppingDistance)
       {
@@ -36,6 +36,8 @@ namespace GDTestWork
 
     public void LookAtTarget(float rotationSpeed, Transform target, Transform self)
     {
+      if (target == null) return;
+
       Vector3 direction = (target.position - self.position).normalized;
       Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 

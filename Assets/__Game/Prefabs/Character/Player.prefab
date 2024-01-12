@@ -1292,8 +1292,8 @@ GameObject:
   - component: {fileID: 8039502532999030155}
   - component: {fileID: 8281045939077366159}
   - component: {fileID: 6182740842096556838}
-  - component: {fileID: 200958041596570651}
   - component: {fileID: 3459550410909817667}
+  - component: {fileID: 5699382662605254743}
   - component: {fileID: 36134452532192951}
   - component: {fileID: 8617545017510144071}
   - component: {fileID: 7489359866431984576}
@@ -1371,29 +1371,6 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.25, z: 0}
---- !u!136 &200958041596570651
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3165753323522477484}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.55
-  m_Height: 2.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &3459550410909817667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1409,6 +1386,19 @@ MonoBehaviour:
   <CharacterAnimation>k__BackingField: {fileID: 8617545017510144071}
   <PlayerMovement>k__BackingField: {fileID: 36134452532192951}
   <PlayerWeaponHandler>k__BackingField: {fileID: 7489359866431984576}
+--- !u!114 &5699382662605254743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165753323522477484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e44069c4396404c8065e24eed9553a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 500
 --- !u!114 &36134452532192951
 MonoBehaviour:
   m_ObjectHideFlags: 0

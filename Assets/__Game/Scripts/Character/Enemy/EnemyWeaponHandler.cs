@@ -8,12 +8,9 @@ namespace GDTestWork
     [field: SerializeField] public float MinAttackRate { get; private set; } = 1.5f;
     [field: SerializeField] public float MaxAttackRate { get; private set; } = 2.5f;
 
-    private EnemyController _enemyController;
-
     private void Awake()
     {
       characterController = GetComponent<CharacterControllerBase>();
-      _enemyController = GetComponent<EnemyController>();
       CurrentWeapon = GetComponentInChildren<Weapon>();
     }
 
@@ -25,6 +22,30 @@ namespace GDTestWork
     public override void UseWeaponAttackMain()
     {
       CurrentWeapon.AttackMain();
+      CurrentWeapon.EnableCollider(true);
+
+      StartCoroutine(DoDisableColliderAfterAttack());
+    }
+
+    private IEnumerator DoDisableColliderAfterAttack()
+    {
+      yield return new WaitForSeconds(characterController.CharacterAnimation.CrossDur);
+
+      float animLength = 0;
+
+      foreach (string anim in CurrentWeapon.AnimationNames)
+      {
+        if (characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).IsName(anim) == true)
+        {
+          animLength = characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).length;
+        }
+      }
+
+      StartCoroutine(CurrentWeapon.DoEnableCollider(false, animLength - 0.6f));
+
+      yield return new WaitForSeconds(animLength - 0.25f);
+
+      CurrentWeapon.EnableCollider(false);
     }
   }
 }
