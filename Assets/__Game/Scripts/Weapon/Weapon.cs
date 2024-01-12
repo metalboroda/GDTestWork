@@ -27,6 +27,7 @@ namespace GDTestWork
     private void Start()
     {
       _capsuleCollider.enabled = false;
+
       InitAnimNames();
     }
 

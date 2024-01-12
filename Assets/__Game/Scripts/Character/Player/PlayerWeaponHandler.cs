@@ -87,7 +87,7 @@ namespace GDTestWork
       }
     }
 
-    private void UseWeaponAttackMain()
+    override public void UseWeaponAttackMain()
     {
       if (characterController.StateMachine.CurrentState is not PlayerMovementState) return;
 
@@ -101,7 +101,7 @@ namespace GDTestWork
       }
     }
 
-    private void UseWeaponAttackSuper()
+    override public void UseWeaponAttackSuper()
     {
       if (characterController.StateMachine.CurrentState is not PlayerMovementState) return;
 

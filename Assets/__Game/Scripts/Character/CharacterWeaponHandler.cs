@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GDTestWork
 {
-  public class CharacterWeaponHandler : MonoBehaviour
+  public abstract class CharacterWeaponHandler : MonoBehaviour
   {
     [SerializeField] protected LayerMask enemyLayer;
 
@@ -12,5 +12,9 @@ namespace GDTestWork
     public Weapon CurrentWeapon { get; set; }
 
     protected CharacterControllerBase characterController;
+
+    public virtual void UseWeaponAttackMain() { }
+
+    public virtual void UseWeaponAttackSuper() { }
   }
 }

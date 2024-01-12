@@ -19,7 +19,7 @@ namespace GDTestWork
 
     public void MovementAnim()
     {
-      Animator.CrossFadeInFixedTime(_charAnimSO.MovementBlendAnim, CrossDur);
+      PlayAnim(_charAnimSO.MovementBlendAnim);
     }
 
     public void MovementAnimValue(float value)
@@ -29,7 +29,12 @@ namespace GDTestWork
 
     public void IdleFightAnim()
     {
-      Animator.CrossFadeInFixedTime(_charAnimSO.IdleFightAnim, CrossDur);
+      PlayAnim(_charAnimSO.IdleFightAnim);
+    }
+
+    private void PlayAnim(string animName)
+    {
+      Animator.CrossFadeInFixedTime(animName, CrossDur);
     }
   }
 }

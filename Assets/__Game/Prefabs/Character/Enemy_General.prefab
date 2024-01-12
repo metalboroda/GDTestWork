@@ -2675,6 +2675,7 @@ GameObject:
   - component: {fileID: 5730541038633634101}
   - component: {fileID: 3521367539050445062}
   - component: {fileID: 6610742516844145150}
+  - component: {fileID: 6307146220794435285}
   m_Layer: 8
   m_Name: Enemy_General
   m_TagString: Untagged
@@ -2805,6 +2806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CharacterAnimation>k__BackingField: {fileID: 6610742516844145150}
   <EnemyMovement>k__BackingField: {fileID: 3521367539050445062}
+  <EnemyWeaponHandler>k__BackingField: {fileID: 6307146220794435285}
 --- !u!114 &5730541038633634101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2848,6 +2850,24 @@ MonoBehaviour:
   _charAnimSO: {fileID: 11400000, guid: 755b07009f0ce4a429da327e11ccc77c, type: 2}
   <CrossDur>k__BackingField: 0.2
   <DampTime>k__BackingField: 0.1
+--- !u!114 &6307146220794435285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5822562596582563265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce04744c3c2a424980c88271b0063a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  <CrossDur>k__BackingField: 0.2
+  <MinAttackRate>k__BackingField: 1.5
+  <MaxAttackRate>k__BackingField: 2.5
 --- !u!1 &5960858980640347997
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,6 +3150,8 @@ GameObject:
   - component: {fileID: 7354750642000198584}
   - component: {fileID: 6122870667774082345}
   - component: {fileID: 8844244917976274864}
+  - component: {fileID: 5732590834970605231}
+  - component: {fileID: 7253811300090978398}
   m_Layer: 0
   m_Name: goblin_ran_club
   m_TagString: Untagged
@@ -3202,6 +3224,43 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &5732590834970605231
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6592594411494696526}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Height: 12.895253
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 38}
+--- !u!114 &7253811300090978398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6592594411494696526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6120a1a4a2dc0504888f73d94bebd8bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponSO: {fileID: 11400000, guid: b81a3d8deac4d024abdb8e1924ebc91c, type: 2}
+  weaponAnimSO: {fileID: 11400000, guid: 06f52153ec22dc1409009c67915f1ed2, type: 2}
 --- !u!1 &6827384279118610485
 GameObject:
   m_ObjectHideFlags: 0
