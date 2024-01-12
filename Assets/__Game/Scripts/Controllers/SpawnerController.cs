@@ -9,6 +9,9 @@ namespace GDTestWork
   {
     public static SpawnerController Instance;
 
+    [SerializeField] private float dealyBetweenWaves = 3f;
+
+    [Header("")]
     [SerializeField] private List<EnemySpawnWaveSO> enemySpawnWaveSOs = new();
 
     public List<EnemySpawner> EnemySpawners { get; set; } = new();
@@ -106,7 +109,7 @@ namespace GDTestWork
         {
           if (_removedEnemiesCount >= waveSO.EnemiesLimit)
           {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(dealyBetweenWaves);
 
             _removedEnemiesCount = 0;
             _spawnedEnemiesCount.Remove(waveSO);
