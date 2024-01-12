@@ -5,8 +5,8 @@ namespace GDTestWork
 {
   public class EnemyWeaponHandler : CharacterWeaponHandler
   {
-    [field: SerializeField] public float MinAttackRate { get; private set; } = 1.5f;
-    [field: SerializeField] public float MaxAttackRate { get; private set; } = 2.5f;
+    [field: SerializeField] public float MinAttackRate { get; private set; } = 1f;
+    [field: SerializeField] public float MaxAttackRate { get; private set; } = 2f;
 
     private void Awake()
     {

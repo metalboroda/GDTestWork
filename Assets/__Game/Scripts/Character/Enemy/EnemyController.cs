@@ -7,7 +7,7 @@ namespace GDTestWork
     [field: SerializeField] public EnemyMovement EnemyMovement { get; private set; }
     [field: SerializeField] public EnemyWeaponHandler EnemyWeaponHandler { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
       StateMachine.Init(new EnemyChaseState(this));
     }

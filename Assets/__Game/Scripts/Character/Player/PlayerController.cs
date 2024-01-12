@@ -12,6 +12,10 @@ namespace GDTestWork
     private void Awake()
     {
       Instance = this;
+    }
+
+    private void Start()
+    {
       StateMachine.Init(new PlayerMovementState(this));
     }
 

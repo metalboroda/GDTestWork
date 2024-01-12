@@ -31,6 +31,11 @@ namespace GDTestWork
 
     public bool Chasing()
     {
+      if (TargetToMove == null)
+      {
+        return true;
+      }
+
       return _enemyChaseComp.Chasing(TargetToMove, _navMeshAgent);
     }
 
