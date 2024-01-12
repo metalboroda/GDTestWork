@@ -1412,7 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MovementSpeed>k__BackingField: 5
-  <RotationSpeed>k__BackingField: 20
+  <RotationSpeed>k__BackingField: 30
 --- !u!114 &8617545017510144071
 MonoBehaviour:
   m_ObjectHideFlags: 0

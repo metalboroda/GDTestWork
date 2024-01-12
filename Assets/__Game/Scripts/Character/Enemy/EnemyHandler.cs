@@ -1,7 +1,12 @@
+using UnityEngine;
+
 namespace GDTestWork
 {
   public class EnemyHandler : CharacterHandler
   {
+    [Header("")]
+    [SerializeField] private int healthReward = 10;
+
     private EnemyController _enemyController;
 
     private void Awake()
@@ -23,6 +28,8 @@ namespace GDTestWork
         CurrentHealth = 0;
         _enemyController.EnemyPool.ReturnObjectToPool(_enemyController);
         _enemyController.SpawnerController.RemoveSpawnedEnemy(_enemyController);
+
+        EventManager.RaisePlayerHealthIncreased(healthReward);
       }
     }
   }

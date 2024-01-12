@@ -164,5 +164,11 @@ namespace GDTestWork
         EnableSuperAttack(false);
       }
     }
+
+    private void OnDrawGizmos()
+    {
+      Gizmos.color = Color.red;
+      Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
   }
 }
