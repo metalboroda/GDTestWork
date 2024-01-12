@@ -21,8 +21,8 @@ namespace GDTestWork
       if (CurrentHealth <= 0)
       {
         CurrentHealth = 0;
-
         _enemyController.EnemyPool.ReturnObjectToPool(_enemyController);
+        _enemyController.SpawnerController.RemoveSpawnedEnemy(_enemyController);
       }
     }
   }

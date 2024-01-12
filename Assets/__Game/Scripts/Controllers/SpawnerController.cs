@@ -6,14 +6,25 @@ namespace GDTestWork
 {
   public class SpawnerController : MonoBehaviour
   {
+    public static SpawnerController Instance;
+
     [SerializeField] private List<EnemySpawnWaveSO> enemySpawnWaveSOs = new();
 
     public List<EnemySpawner> EnemySpawners { get; set; } = new();
 
+    private List<EnemyController> _spawnedEnemies = new();
     private Dictionary<EnemyController, ObjectPool<EnemyController>> _enemyPools;
+    private Dictionary<EnemySpawnWaveSO, int> _spawnedEnemiesCount;
+
+    private void Awake()
+    {
+      Instance = this;
+    }
 
     private void Start()
     {
+      _spawnedEnemiesCount = new Dictionary<EnemySpawnWaveSO, int>();
+
       InitializeEnemyPools();
       StartCoroutine(SpawnEnemies());
     }
@@ -21,6 +32,16 @@ namespace GDTestWork
     public void AddEnemySpawner(EnemySpawner enemySpawner)
     {
       EnemySpawners.Add(enemySpawner);
+    }
+
+    public void AddSpawnedEnemy(EnemyController enemy)
+    {
+      _spawnedEnemies.Add(enemy);
+    }
+
+    public void RemoveSpawnedEnemy(EnemyController enemy)
+    {
+      _spawnedEnemies.Remove(enemy);
     }
 
     private void InitializeEnemyPools()
@@ -50,11 +71,22 @@ namespace GDTestWork
         foreach (var spawner in EnemySpawners)
         {
           var waveSO = GetRandomWave();
-          var enemyPrefab = GetRandomEnemyFromWave(waveSO);
 
-          if (_enemyPools.TryGetValue(enemyPrefab, out var enemyPool))
+          if (!_spawnedEnemiesCount.ContainsKey(waveSO))
           {
-            spawner.SpawnEnemyAtRandomPoint(enemyPool);
+            _spawnedEnemiesCount.Add(waveSO, 0);
+          }
+
+          if (_spawnedEnemiesCount[waveSO] < waveSO.EnemiesLimit)
+          {
+            var enemyPrefab = GetRandomEnemyFromWave(waveSO);
+
+            if (_enemyPools.TryGetValue(enemyPrefab, out var enemyPool))
+            {
+              spawner.SpawnEnemyAtRandomPoint(enemyPool);
+
+              _spawnedEnemiesCount[waveSO]++;
+            }
           }
         }
       }

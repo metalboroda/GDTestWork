@@ -32,6 +32,7 @@ namespace GDTestWork
       var spawnedEnemy = enemyPool.GetObjectFromPool(randPos, randRot, null);
 
       spawnedEnemy.SpawnInit(enemyPool);
+      _spawnerController.AddSpawnedEnemy(spawnedEnemy);
     }
 
     private Vector3 GetRandomPointInsideCollider()

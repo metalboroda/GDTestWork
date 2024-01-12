@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace GDTestWork
 {
@@ -10,8 +11,11 @@ namespace GDTestWork
 
     public ObjectPool<EnemyController> EnemyPool { get; private set; }
 
+    public SpawnerController SpawnerController { get; private set; }
+
     private void Start()
     {
+      SpawnerController = SpawnerController.Instance;
       StateMachine.Init(new EnemyChaseState(this));
     }
 
