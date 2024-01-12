@@ -1,8 +1,8 @@
 namespace GDTestWork
 {
-  public class PlayerAttackingState : State
+  public class PlayerAttackState : State
   {
-    public PlayerAttackingState(PlayerController playerController)
+    public PlayerAttackState(PlayerController playerController)
     {
       _playerController = playerController;
       _characterAnimation = _playerController.CharacterAnimation;
