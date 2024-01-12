@@ -12,7 +12,7 @@ namespace GDTestWork
     [SerializeField] private float dealyBetweenWaves = 3f;
 
     [Header("")]
-    [SerializeField] private List<EnemySpawnWaveSO> enemySpawnWaveSOs = new();
+    [SerializeField] private List<EnemySpawnWaveSO> enemySpawnWaves = new();
 
     public List<EnemySpawner> EnemySpawners { get; set; } = new();
 
@@ -55,7 +55,7 @@ namespace GDTestWork
     {
       _enemyPools = new Dictionary<EnemyController, ObjectPool<EnemyController>>();
 
-      foreach (var waveSO in enemySpawnWaveSOs)
+      foreach (var waveSO in enemySpawnWaves)
       {
         foreach (var enemyPrefab in waveSO.EnemiesToSpawn)
         {
@@ -114,9 +114,9 @@ namespace GDTestWork
             _removedEnemiesCount = 0;
             _spawnedEnemiesCount.Remove(waveSO);
 
-            var index = enemySpawnWaveSOs.IndexOf(waveSO);
-            var nextIndex = (index + 1) % enemySpawnWaveSOs.Count;
-            var nextWaveSO = enemySpawnWaveSOs[nextIndex];
+            var index = enemySpawnWaves.IndexOf(waveSO);
+            var nextIndex = (index + 1) % enemySpawnWaves.Count;
+            var nextWaveSO = enemySpawnWaves[nextIndex];
 
             _spawnedEnemiesCount.Add(nextWaveSO, 0);
 
@@ -127,7 +127,7 @@ namespace GDTestWork
         if (_spawnedEnemiesCount.Count == 0)
         {
           _removedEnemiesCount = 0;
-          _spawnedEnemiesCount.Add(enemySpawnWaveSOs[0], 0);
+          _spawnedEnemiesCount.Add(enemySpawnWaves[0], 0);
 
           //Debug.Log("Restarting from the first wave");
         }
@@ -136,7 +136,7 @@ namespace GDTestWork
 
     private EnemySpawnWaveSO GetRandomWave()
     {
-      return enemySpawnWaveSOs[Random.Range(0, enemySpawnWaveSOs.Count)];
+      return enemySpawnWaves[Random.Range(0, enemySpawnWaves.Count)];
     }
 
     private EnemyController GetRandomEnemyFromWave(EnemySpawnWaveSO waveSO)
