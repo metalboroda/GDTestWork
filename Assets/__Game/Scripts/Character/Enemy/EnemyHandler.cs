@@ -11,7 +11,7 @@ namespace GDTestWork
 
     private void Start()
     {
-      CurrentHealth = Health;
+      CurrentHealth = MaxHealth;
     }
 
     public override void Damage(int damage)

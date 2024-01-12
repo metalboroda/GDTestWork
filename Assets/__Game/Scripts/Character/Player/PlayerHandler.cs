@@ -4,7 +4,7 @@ namespace GDTestWork
   {
     private void Start()
     {
-      CurrentHealth = Health;
+      CurrentHealth = MaxHealth;
     }
 
     public override void Damage(int damage)
@@ -17,6 +17,8 @@ namespace GDTestWork
 
         Destroy(gameObject);
       }
+
+      EventManager.RaisePlayerHealthChanged(CurrentHealth, MaxHealth);
     }
   }
 }

@@ -28,7 +28,7 @@ namespace GDTestWork
     {
       EnemyPool = enemyPool;
       StateMachine.Init(new EnemyChaseState(this));
-      EnemyHandler.CurrentHealth = EnemyHandler.Health;
+      EnemyHandler.CurrentHealth = EnemyHandler.MaxHealth;
     }
   }
 }
