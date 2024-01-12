@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,6 +65,13 @@ namespace GDTestWork
 
     public void EnableCollider(bool enable)
     {
+      _capsuleCollider.enabled = enable;
+    }
+
+    public IEnumerator DoEnableCollider(bool enable, float delay)
+    {
+      yield return new WaitForSeconds(delay);
+
       _capsuleCollider.enabled = enable;
     }
 

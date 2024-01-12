@@ -119,19 +119,22 @@ namespace GDTestWork
     {
       yield return new WaitForSeconds(characterController.CharacterAnimation.CrossDur);
 
-      float animTime = 0;
+      float animLength = 0;
+      float animTimeNorm = 0;
 
       foreach (string anim in CurrentWeapon.AnimationNames)
       {
-        if (characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).IsName(anim) == false)
+        if (characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).IsName(anim) == true)
         {
-          animTime = characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).length - 0.25f;
+          animLength = characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).length;
+          animTimeNorm = characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
         }
       }
 
-      yield return new WaitForSeconds(animTime);
+      StartCoroutine(CurrentWeapon.DoEnableCollider(false, animLength - 0.6f));
 
-      CurrentWeapon.EnableCollider(false);
+      yield return new WaitForSeconds(animLength - 0.25f);
+
       characterController.StateMachine.ChangeState(new PlayerMovementState(_playerController));
     }
   }
