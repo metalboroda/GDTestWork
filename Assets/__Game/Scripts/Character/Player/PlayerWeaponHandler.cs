@@ -120,14 +120,12 @@ namespace GDTestWork
       yield return new WaitForSeconds(characterController.CharacterAnimation.CrossDur);
 
       float animLength = 0;
-      float animTimeNorm = 0;
 
       foreach (string anim in CurrentWeapon.AnimationNames)
       {
         if (characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).IsName(anim) == true)
         {
           animLength = characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).length;
-          animTimeNorm = characterController.CharacterAnimation.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
         }
       }
 
