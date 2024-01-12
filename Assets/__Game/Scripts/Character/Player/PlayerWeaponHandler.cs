@@ -95,7 +95,7 @@ namespace GDTestWork
       {
         CurrentWeapon.AttackMain();
         CurrentWeapon.EnableCollider(true);
-        characterController.StateMachine.ChangeState(new PlayerAttackState(_playerController));
+        characterController.StateMachine.ChangeState(new PlayerFightState(_playerController));
 
         StartCoroutine(DoBackToMovementState());
       }
@@ -109,7 +109,7 @@ namespace GDTestWork
       {
         CurrentWeapon.AttackSuper();
         CurrentWeapon.EnableCollider(true);
-        characterController.StateMachine.ChangeState(new PlayerAttackState(_playerController));
+        characterController.StateMachine.ChangeState(new PlayerFightState(_playerController));
 
         StartCoroutine(DoBackToMovementState());
       }

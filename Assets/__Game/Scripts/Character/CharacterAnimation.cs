@@ -26,5 +26,10 @@ namespace GDTestWork
     {
       Animator.SetFloat(_charAnimSO.MovementBlendValue, value, DampTime, Time.deltaTime);
     }
+
+    public void IdleFightAnim()
+    {
+      Animator.CrossFadeInFixedTime(_charAnimSO.IdleFightAnim, CrossDur);
+    }
   }
 }

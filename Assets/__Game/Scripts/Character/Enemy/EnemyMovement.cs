@@ -38,5 +38,22 @@ namespace GDTestWork
     {
       _enemyChaseComp.LookAtTarget(rotationSpeed, TargetToMove, transform);
     }
+
+    public float GetNormalizedNavMeshAgentVelocity()
+    {
+      // Ensure _navMeshAgent is not null
+      if (_navMeshAgent != null)
+      {
+        float velocityMagnitude = _navMeshAgent.velocity.magnitude;
+        float maxSpeed = _navMeshAgent.speed;
+        float normalizedVelocity = velocityMagnitude / maxSpeed;
+
+        normalizedVelocity = Mathf.Clamp01(normalizedVelocity);
+
+        return normalizedVelocity;
+      }
+
+      return 0f;
+    }
   }
 }

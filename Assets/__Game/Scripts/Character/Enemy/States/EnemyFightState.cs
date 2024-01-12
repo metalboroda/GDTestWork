@@ -1,15 +1,22 @@
 namespace GDTestWork
 {
-  public class EnemyAttackState : State
+  public class EnemyFightState : State
   {
-    public EnemyAttackState(EnemyController enemyController)
+    public EnemyFightState(EnemyController enemyController)
     {
       _enemyController = enemyController;
       _enemyMovement = _enemyController.EnemyMovement;
+      _characterAnimation = _enemyController.CharacterAnimation;
     }
 
     private EnemyController _enemyController;
     private EnemyMovement _enemyMovement;
+    private CharacterAnimation _characterAnimation;
+
+    public override void Enter()
+    {
+      _characterAnimation.IdleFightAnim();
+    }
 
     public override void Update()
     {

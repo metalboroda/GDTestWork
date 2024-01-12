@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GoblinAnim
   m_EditorClassIdentifier: 
   <MovementBlendAnim>k__BackingField: MovementBlend
+  <IdleFightAnim>k__BackingField: IdleFight
   <MovementBlendValue>k__BackingField: MovementBlendValue
