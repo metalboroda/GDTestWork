@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +35,7 @@ namespace GDTestWork
     private void UpdateWaveCounter(int wave)
     {
       waveCounterTxt.SetText($"WAVE {wave + 1}");
+      waveCounterTxt.transform.DOPunchRotation(new Vector3(0, 0, 3), 0.25f);
     }
   }
 }
