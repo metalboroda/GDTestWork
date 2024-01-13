@@ -15,6 +15,7 @@ namespace GDTestWork
     private List<EnemyController> _spawnedEnemies = new();
     private int _removedEnemiesCount;
     private int _currentWaveIndex = 0;
+    private int _overallWaveIndex = 0;
 
     private void Awake()
     {
@@ -44,6 +45,10 @@ namespace GDTestWork
 
           ShuffleWaves();
         }
+
+        _overallWaveIndex++;
+
+        EventManager.RaiseEnemyWaveChanged(_overallWaveIndex);
       }
     }
 
