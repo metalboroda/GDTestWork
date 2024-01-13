@@ -296,6 +296,8 @@ MonoBehaviour:
   delayBetweenWaves: 3
   enemyWaves:
   - {fileID: 11400000, guid: 946aea5922e6de64c9c5fb594ad17955, type: 2}
+  - {fileID: 11400000, guid: 43916bd93845c35478e3daf70e0e0701, type: 2}
+  - {fileID: 11400000, guid: 0ebc57caa346c3249a24bdaa8b12380b, type: 2}
 --- !u!1 &467577535
 GameObject:
   m_ObjectHideFlags: 0
