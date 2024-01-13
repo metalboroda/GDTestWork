@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Lean.Pool;
 using System.Collections;
 using UnityEngine;
@@ -15,22 +16,17 @@ namespace GDTestWork
 
     [Header("VFX")]
     [SerializeField] private VFXHandler spawnVFX;
-    [SerializeField] private VFXHandler destroyVFX;
-
-    private CapsuleCollider _capsuleCollider;
 
     private EnemyController _enemyController;
 
     private void Awake()
     {
-      _capsuleCollider = GetComponent<CapsuleCollider>();
-
       _enemyController = GetComponent<EnemyController>();
     }
 
     private void Start()
     {
-      _capsuleCollider.enabled = false;
+      _enemyController.CapsuleCollider.enabled = false;
 
       CurrentHealth = MaxHealth;
 
@@ -52,25 +48,30 @@ namespace GDTestWork
 
     private void Death()
     {
+      _enemyController.StateMachine.ChangeState(new EnemyDeathState(_enemyController));
+
       if (_enemyController.EnemyType == EnemyType.Trixter)
       {
         SpawnDoppel();
       }
 
+      _enemyController.CapsuleCollider.enabled = false;
+      _enemyController.NavMeshAgent.enabled = false;
       _enemyController.SpawnerController.RemoveSpawnedEnemy(_enemyController);
 
       EventManager.RaisePlayerHealthIncreased(healthReward);
 
-      DestroyVFX();
+      StartCoroutine(DoDissapear());
+    }
 
-      if (_enemyController.InPool == true)
+    public IEnumerator DoDissapear()
+    {
+      yield return new WaitForSeconds(2);
+
+      transform.DOMoveY(-2, 1).SetSpeedBased(true).OnComplete(() =>
       {
-        _enemyController.EnemyPool.ReturnObjectToPool(_enemyController);
-      }
-      else
-      {
-        Destroy(gameObject);
-      }
+        LeanPool.Despawn(gameObject);
+      });
     }
 
     private void SpawnDoppel()
@@ -81,7 +82,9 @@ namespace GDTestWork
 
       for (int i = 0; i < doppelAmount; i++)
       {
-        Instantiate(doppelPrefab, spawnPos, transform.rotation);
+        var spawnedDoppel = LeanPool.Spawn(doppelPrefab, spawnPos, transform.rotation);
+
+        spawnedDoppel.SpawnInit();
       }
     }
 
@@ -89,19 +92,12 @@ namespace GDTestWork
     {
       yield return new WaitForSeconds(invincibilityFrames);
 
-      _capsuleCollider.enabled = true;
+      _enemyController.CapsuleCollider.enabled = true;
     }
 
     private void SpawnVFX()
     {
       var spawnedVFX = LeanPool.Spawn(spawnVFX, transform.position, Quaternion.identity);
-
-      spawnedVFX.SpawnInit();
-    }
-
-    private void DestroyVFX()
-    {
-      var spawnedVFX = LeanPool.Spawn(destroyVFX, transform.position, Quaternion.identity);
 
       spawnedVFX.SpawnInit();
     }

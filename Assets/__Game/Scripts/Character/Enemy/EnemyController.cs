@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace GDTestWork
 {
@@ -8,16 +9,20 @@ namespace GDTestWork
     [field: SerializeField] public EnemyType EnemyType { get; private set; }
 
     [field: Header("")]
-    [field: SerializeField] public bool InPool { get; private set; }
-
-    [field: Header("")]
     [field: SerializeField] public EnemyHandler EnemyHandler { get; private set; }
     [field: SerializeField] public EnemyMovement EnemyMovement { get; private set; }
     [field: SerializeField] public EnemyWeaponHandler EnemyWeaponHandler { get; private set; }
 
-    public ObjectPool<EnemyController> EnemyPool { get; private set; }
+    public NavMeshAgent NavMeshAgent { get; private set; }
+    public CapsuleCollider CapsuleCollider { get; private set; }
 
     public SpawnerController SpawnerController { get; private set; }
+
+    private void Awake()
+    {
+      NavMeshAgent = GetComponent<NavMeshAgent>();
+      CapsuleCollider = GetComponent<CapsuleCollider>();
+    }
 
     private void Start()
     {
@@ -30,10 +35,11 @@ namespace GDTestWork
       StateMachine.CurrentState.Update();
     }
 
-    public void SpawnInit(ObjectPool<EnemyController> enemyPool)
+    public void SpawnInit()
     {
-      EnemyPool = enemyPool;
       StateMachine.Init(new EnemyChaseState(this));
+      CapsuleCollider.enabled = true;
+      NavMeshAgent.enabled = true;
       EnemyHandler.CurrentHealth = EnemyHandler.MaxHealth;
     }
   }

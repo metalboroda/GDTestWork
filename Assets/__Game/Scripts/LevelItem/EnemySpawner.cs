@@ -1,3 +1,4 @@
+using Lean.Pool;
 using UnityEngine;
 using Zenject;
 
@@ -25,22 +26,13 @@ namespace GDTestWork
       _playerController = PlayerController.Instance;
     }
 
-    public void SpawnEnemyAtRandomPoint(ObjectPool<EnemyController> enemyPool)
-    {
-      var randPos = GetRandomPointInsideCollider();
-      var randRot = Quaternion.Euler(0, Random.Range(-360, 360), 0);
-      var spawnedEnemy = enemyPool.GetObjectFromPool(randPos, randRot, null);
-
-      spawnedEnemy.SpawnInit(enemyPool);
-      _spawnerController.AddSpawnedEnemy(spawnedEnemy);
-    }
-
     public void SpawnEnemyAtRandomPoint(EnemyController enemy)
     {
       var randPos = GetRandomPointInsideCollider();
       var randRot = Quaternion.Euler(0, Random.Range(-360, 360), 0);
+      var spawnedEnemy = LeanPool.Spawn(enemy, randPos, randRot);
 
-      Instantiate(enemy, randPos, randRot, null);
+      spawnedEnemy.SpawnInit();
     }
 
     private Vector3 GetRandomPointInsideCollider()

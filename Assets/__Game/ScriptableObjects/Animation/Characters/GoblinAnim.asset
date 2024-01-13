@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MovementBlendAnim>k__BackingField: MovementBlend
   <IdleFightAnim>k__BackingField: IdleFight
+  <DeathAnim>k__BackingField: Death
   <MovementBlendValue>k__BackingField: MovementBlendValue

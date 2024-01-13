@@ -38,6 +38,11 @@ namespace GDTestWork
       PlayAnim(_charAnimSO.IdleFightAnim);
     }
 
+    public void DeathAnim()
+    {
+      PlayAnim(_charAnimSO.DeathAnim);
+    }
+
     private void PlayAnim(string animName)
     {
       Animator.CrossFadeInFixedTime(animName, CrossDur);

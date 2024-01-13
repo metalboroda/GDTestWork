@@ -7,6 +7,7 @@ namespace GDTestWork
   {
     [field: SerializeField] public string MovementBlendAnim { get; private set; }
     [field: SerializeField] public string IdleFightAnim { get; private set; }
+    [field: SerializeField] public string DeathAnim { get; private set; }
 
     [field: Header("Values")]
     [field: SerializeField] public string MovementBlendValue { get; private set; }

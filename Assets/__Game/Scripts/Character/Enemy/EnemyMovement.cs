@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace GDTestWork
 {
@@ -11,11 +10,11 @@ namespace GDTestWork
 
     private readonly EnemyChaseComp _enemyChaseComp = new();
 
-    private NavMeshAgent _navMeshAgent;
+    private EnemyController _enemyController;
 
     private void Awake()
     {
-      _navMeshAgent = GetComponent<NavMeshAgent>();
+      _enemyController = GetComponent<EnemyController>();
     }
 
     private void Start()
@@ -26,7 +25,7 @@ namespace GDTestWork
     public void Chase(float movementSpeed, float rotationSpeed, float stoppingDistance)
     {
       _enemyChaseComp.Chase(movementSpeed, rotationSpeed, stoppingDistance,
-        TargetToMove, _navMeshAgent);
+        TargetToMove, _enemyController.NavMeshAgent);
     }
 
     public bool Chasing()
@@ -36,7 +35,7 @@ namespace GDTestWork
         return true;
       }
 
-      return _enemyChaseComp.Chasing(TargetToMove, _navMeshAgent);
+      return _enemyChaseComp.Chasing(TargetToMove, _enemyController.NavMeshAgent);
     }
 
     public void LookAtTarget(float rotationSpeed)
@@ -46,10 +45,10 @@ namespace GDTestWork
 
     public float GetNormalizedNavMeshAgentVelocity()
     {
-      if (_navMeshAgent != null)
+      if (_enemyController.NavMeshAgent != null)
       {
-        float velocityMagnitude = _navMeshAgent.velocity.magnitude;
-        float maxSpeed = _navMeshAgent.speed;
+        float velocityMagnitude = _enemyController.NavMeshAgent.velocity.magnitude;
+        float maxSpeed = _enemyController.NavMeshAgent.speed;
         float normalizedVelocity = velocityMagnitude / maxSpeed;
 
         normalizedVelocity = Mathf.Clamp01(normalizedVelocity);

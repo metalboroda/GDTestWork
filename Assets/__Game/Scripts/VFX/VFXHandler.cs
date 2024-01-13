@@ -6,8 +6,6 @@ namespace GDTestWork
 {
   public class VFXHandler : MonoBehaviour
   {
-    [SerializeField] private bool inPool;
-
     [Header("")]
     [SerializeField] private Vector3 offset = Vector3.zero;
 
@@ -34,14 +32,7 @@ namespace GDTestWork
 
       yield return new WaitForSeconds(vfxDuration);
 
-      if (inPool == true)
-      {
-        LeanPool.Despawn(gameObject);
-      }
-      else
-      {
-        Destroy(gameObject);
-      }
+      LeanPool.Despawn(gameObject);
     }
   }
 }
