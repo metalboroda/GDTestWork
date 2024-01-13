@@ -1426,6 +1426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charAnimSO: {fileID: 11400000, guid: 755b07009f0ce4a429da327e11ccc77c, type: 2}
+  <AnimatorSpeed>k__BackingField: 1
   <CrossDur>k__BackingField: 0.2
   <DampTime>k__BackingField: 0.1
 --- !u!114 &7489359866431984576
@@ -2179,7 +2180,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8599619086870588788}
-  - component: {fileID: 1863918768162570254}
   m_Layer: 0
   m_Name: Player_Model
   m_TagString: Untagged
@@ -2214,27 +2214,6 @@ Transform:
   - {fileID: 6327218208801803465}
   m_Father: {fileID: 4606951073624533276}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1863918768162570254
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4687299603844947815}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: cb01db2707aa97a4e94efee03de71f52, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1d6a3a495edbf24439b7f6ca0d94afd8, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4846388695614006726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4189,7 +4168,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 15
   m_Height: 3.4587789
   m_Direction: 1
   m_Center: {x: 3.5, y: 0, z: 28}

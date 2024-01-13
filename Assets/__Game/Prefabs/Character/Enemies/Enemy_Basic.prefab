@@ -638,7 +638,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e4c287188663d264ab723588fcf3dd51, type: 2}
+  - {fileID: 2100000, guid: 448d7f41284188b498fdcc724de5fabd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1388,7 +1388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6071172835101591805
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,7 +1432,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e4c287188663d264ab723588fcf3dd51, type: 2}
+  - {fileID: 2100000, guid: 448d7f41284188b498fdcc724de5fabd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2805,6 +2805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharacterAnimation>k__BackingField: {fileID: 6610742516844145150}
+  InPool: 0
   <EnemyHandler>k__BackingField: {fileID: 5730541038633634101}
   <EnemyMovement>k__BackingField: {fileID: 3521367539050445062}
   <EnemyWeaponHandler>k__BackingField: {fileID: 6307146220794435285}
@@ -2850,6 +2851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charAnimSO: {fileID: 11400000, guid: 755b07009f0ce4a429da327e11ccc77c, type: 2}
+  <AnimatorSpeed>k__BackingField: 1
   <CrossDur>k__BackingField: 0.2
   <DampTime>k__BackingField: 0.1
 --- !u!114 &6307146220794435285
@@ -3246,7 +3248,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 10
-  m_Height: 12.895253
+  m_Height: 10
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 38}
 --- !u!114 &7253811300090978398
