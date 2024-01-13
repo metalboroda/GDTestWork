@@ -2805,7 +2805,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharacterAnimation>k__BackingField: {fileID: 6610742516844145150}
-  InPool: 0
+  <EnemyType>k__BackingField: 1
+  <InPool>k__BackingField: 0
   <EnemyHandler>k__BackingField: {fileID: 5730541038633634101}
   <EnemyMovement>k__BackingField: {fileID: 3521367539050445062}
   <EnemyWeaponHandler>k__BackingField: {fileID: 6307146220794435285}
