@@ -11,8 +11,8 @@ namespace GDTestWork
     [SerializeField] private float delayBetweenWaves = 3f;
     [SerializeField] private List<EnemySpawnWaveSO> enemyWaves = new();
 
-    private readonly List<EnemySpawner> _enemySpawners = new();
-    private readonly List<EnemyController> _spawnedEnemies = new();
+    private List<EnemySpawner> _enemySpawners = new();
+    private List<EnemyController> _spawnedEnemies = new();
     private int _removedEnemiesCount;
     private int _currentWaveIndex = 0;
 
@@ -37,6 +37,13 @@ namespace GDTestWork
         yield return new WaitUntil(() => _removedEnemiesCount >= enemyWaves[_currentWaveIndex].EnemiesLimit);
 
         _currentWaveIndex++;
+
+        if (_currentWaveIndex >= enemyWaves.Count)
+        {
+          _currentWaveIndex = 0;
+
+          ShuffleWaves();
+        }
       }
     }
 
@@ -77,8 +84,20 @@ namespace GDTestWork
       _spawnedEnemies.Remove(enemy);
       _removedEnemiesCount++;
 
-      if (_removedEnemiesCount >= enemyWaves[_currentWaveIndex].EnemiesLimit)
+      /*if (_removedEnemiesCount >= enemyWaves[_currentWaveIndex].EnemiesLimit)
       {
+      }*/
+    }
+
+    private void ShuffleWaves()
+    {
+      for (int i = 0; i < enemyWaves.Count; i++)
+      {
+        EnemySpawnWaveSO temp = enemyWaves[i];
+        int randomIndex = Random.Range(i, enemyWaves.Count);
+
+        enemyWaves[i] = enemyWaves[randomIndex];
+        enemyWaves[randomIndex] = temp;
       }
     }
   }
