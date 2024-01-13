@@ -99,7 +99,7 @@ namespace GDTestWork
     {
       var spawnedVFX = LeanPool.Spawn(spawnVFX, transform.position, Quaternion.identity);
 
-      spawnedVFX.SpawnInit();
+      spawnedVFX.SpawnInit(transform);
     }
   }
 }

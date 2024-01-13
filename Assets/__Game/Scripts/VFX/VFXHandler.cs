@@ -7,6 +7,7 @@ namespace GDTestWork
   public class VFXHandler : MonoBehaviour
   {
     [Header("")]
+    [SerializeField] private float spawnTime = 1f;
     [SerializeField] private Vector3 offset = Vector3.zero;
 
     private ParticleSystem _particleSystem;
@@ -16,23 +17,12 @@ namespace GDTestWork
       _particleSystem = GetComponent<ParticleSystem>();
     }
 
-    private void Start()
+    public void SpawnInit(Transform transform)
     {
-      StartCoroutine(DoDestroyOnComplete());
-    }
-
-    public void SpawnInit()
-    {
+      _particleSystem.Play();
       transform.position += offset;
-    }
 
-    private IEnumerator DoDestroyOnComplete()
-    {
-      float vfxDuration = _particleSystem.main.duration;
-
-      yield return new WaitForSeconds(vfxDuration);
-
-      LeanPool.Despawn(gameObject);
+      LeanPool.Despawn(gameObject, spawnTime);
     }
   }
 }
