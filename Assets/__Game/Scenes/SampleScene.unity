@@ -293,8 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73f23d4d00fe9b45b56a6960389938e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dealyBetweenWaves: 3
-  enemySpawnWaves:
+  delayBetweenWaves: 3
+  enemyWaves:
   - {fileID: 11400000, guid: 946aea5922e6de64c9c5fb594ad17955, type: 2}
   - {fileID: 11400000, guid: 43916bd93845c35478e3daf70e0e0701, type: 2}
 --- !u!1 &467577535

@@ -7,6 +7,8 @@ namespace GDTestWork
   public class EnemySpawnWaveSO : ScriptableObject
   {
     [field: SerializeField] public int EnemiesLimit { get; private set; } = 5;
-    [field: SerializeField] public List<EnemyController> EnemiesToSpawn = new();
+    [field: SerializeField] public float DelayBetweenEnemies { get; private set; } = 1.5f;
+    [field: SerializeField] public List<EnemyController> EnemiesToSpawn { get; private set; } = new();
+
   }
 }

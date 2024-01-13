@@ -1,6 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace GDTestWork
@@ -9,17 +8,13 @@ namespace GDTestWork
   {
     public static SpawnerController Instance;
 
-    [SerializeField] private float dealyBetweenWaves = 3f;
+    [SerializeField] private float delayBetweenWaves = 3f;
+    [SerializeField] private List<EnemySpawnWaveSO> enemyWaves = new();
 
-    [Header("")]
-    [SerializeField] private List<EnemySpawnWaveSO> enemySpawnWaves = new();
-
-    public List<EnemySpawner> EnemySpawners { get; set; } = new();
-
+    private readonly List<EnemySpawner> _enemySpawners = new();
     private readonly List<EnemyController> _spawnedEnemies = new();
-    private Dictionary<EnemyController, ObjectPool<EnemyController>> _enemyPools;
-    private Dictionary<EnemySpawnWaveSO, int> _spawnedEnemiesCount;
     private int _removedEnemiesCount;
+    private int _currentWaveIndex = 0;
 
     private void Awake()
     {
@@ -28,16 +23,48 @@ namespace GDTestWork
 
     private void Start()
     {
-      _spawnedEnemiesCount = new Dictionary<EnemySpawnWaveSO, int>();
+      StartCoroutine(SpawnWaves());
+    }
 
-      InitializeEnemyPools();
-      StartCoroutine(SpawnEnemies());
-      StartCoroutine(CheckAndStartNewWave());
+    private IEnumerator SpawnWaves()
+    {
+      while (_currentWaveIndex < enemyWaves.Count)
+      {
+        yield return new WaitForSeconds(delayBetweenWaves);
+
+        SpawnWave(enemyWaves[_currentWaveIndex]);
+
+        yield return new WaitUntil(() => _removedEnemiesCount >= enemyWaves[_currentWaveIndex].EnemiesLimit);
+
+        _currentWaveIndex++;
+      }
+    }
+
+    private void SpawnWave(EnemySpawnWaveSO wave)
+    {
+      _removedEnemiesCount = 0;
+
+      foreach (var spawner in _enemySpawners)
+      {
+        StartCoroutine(SpawnEnemiesFromSpawner(spawner, wave));
+      }
+    }
+
+    private IEnumerator SpawnEnemiesFromSpawner(EnemySpawner spawner, EnemySpawnWaveSO wave)
+    {
+      for (int i = 0; i < wave.EnemiesLimit; i++)
+      {
+        var enemyToSpawn = wave.EnemiesToSpawn[Random.Range(0, wave.EnemiesToSpawn.Count)];
+
+        spawner.SpawnEnemyAtRandomPoint(enemyToSpawn);
+
+        yield return new WaitForSeconds(wave.DelayBetweenEnemies);
+      }
     }
 
     public void AddEnemySpawner(EnemySpawner enemySpawner)
     {
-      EnemySpawners.Add(enemySpawner);
+      _enemySpawners.Add(enemySpawner);
     }
 
     public void AddSpawnedEnemy(EnemyController enemy)
@@ -49,95 +76,10 @@ namespace GDTestWork
     {
       _spawnedEnemies.Remove(enemy);
       _removedEnemiesCount++;
-    }
 
-    private void InitializeEnemyPools()
-    {
-      _enemyPools = new Dictionary<EnemyController, ObjectPool<EnemyController>>();
-
-      foreach (var waveSO in enemySpawnWaves)
+      if (_removedEnemiesCount >= enemyWaves[_currentWaveIndex].EnemiesLimit)
       {
-        foreach (var enemyPrefab in waveSO.EnemiesToSpawn)
-        {
-          if (_enemyPools.ContainsKey(enemyPrefab) == false)
-          {
-            ObjectPool<EnemyController> pool = new(enemyPrefab, 10);
-
-            _enemyPools.Add(enemyPrefab, pool);
-          }
-        }
       }
-    }
-
-    private IEnumerator SpawnEnemies()
-    {
-      while (true)
-      {
-        yield return new WaitForSeconds(1f);
-
-        foreach (var spawner in EnemySpawners)
-        {
-          var waveSO = GetRandomWave();
-
-          if (!_spawnedEnemiesCount.ContainsKey(waveSO))
-          {
-            _spawnedEnemiesCount.Add(waveSO, 0);
-          }
-
-          if (_spawnedEnemiesCount[waveSO] < waveSO.EnemiesLimit)
-          {
-            var enemyPrefab = GetRandomEnemyFromWave(waveSO);
-
-            if (_enemyPools.TryGetValue(enemyPrefab, out var enemyPool))
-            {
-              spawner.SpawnEnemyAtRandomPoint(enemyPool);
-
-              _spawnedEnemiesCount[waveSO]++;
-            }
-          }
-        }
-      }
-    }
-
-    private IEnumerator CheckAndStartNewWave()
-    {
-      while (true)
-      {
-        yield return null;
-
-        foreach (var waveSO in _spawnedEnemiesCount.Keys.ToList())
-        {
-          if (_removedEnemiesCount >= waveSO.EnemiesLimit)
-          {
-            yield return new WaitForSeconds(dealyBetweenWaves);
-
-            _removedEnemiesCount = 0;
-            _spawnedEnemiesCount.Remove(waveSO);
-
-            var index = enemySpawnWaves.IndexOf(waveSO);
-            var nextIndex = (index + 1) % enemySpawnWaves.Count;
-            var nextWaveSO = enemySpawnWaves[nextIndex];
-
-            _spawnedEnemiesCount.Add(nextWaveSO, 0);
-          }
-        }
-
-        if (_spawnedEnemiesCount.Count == 0)
-        {
-          _removedEnemiesCount = 0;
-          _spawnedEnemiesCount.Add(enemySpawnWaves[0], 0);
-        }
-      }
-    }
-
-    private EnemySpawnWaveSO GetRandomWave()
-    {
-      return enemySpawnWaves[Random.Range(0, enemySpawnWaves.Count)];
-    }
-
-    private EnemyController GetRandomEnemyFromWave(EnemySpawnWaveSO waveSO)
-    {
-      return waveSO.EnemiesToSpawn[Random.Range(0, waveSO.EnemiesToSpawn.Count)];
     }
   }
 }

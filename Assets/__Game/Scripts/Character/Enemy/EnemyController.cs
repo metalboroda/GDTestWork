@@ -4,6 +4,9 @@ namespace GDTestWork
 {
   public class EnemyController : CharacterControllerBase
   {
+    [field: SerializeField] public bool InPool;
+
+    [field: Header("")]
     [field: SerializeField] public EnemyHandler EnemyHandler { get; private set; }
     [field: SerializeField] public EnemyMovement EnemyMovement { get; private set; }
     [field: SerializeField] public EnemyWeaponHandler EnemyWeaponHandler { get; private set; }

@@ -35,6 +35,14 @@ namespace GDTestWork
       _spawnerController.AddSpawnedEnemy(spawnedEnemy);
     }
 
+    public void SpawnEnemyAtRandomPoint(EnemyController enemy)
+    {
+      var randPos = GetRandomPointInsideCollider();
+      var randRot = Quaternion.Euler(0, Random.Range(-360, 360), 0);
+
+      Instantiate(enemy, randPos, randRot, null);
+    }
+
     private Vector3 GetRandomPointInsideCollider()
     {
       Vector3 randomPoint;

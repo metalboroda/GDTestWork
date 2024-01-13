@@ -26,7 +26,16 @@ namespace GDTestWork
       if (CurrentHealth <= 0)
       {
         CurrentHealth = 0;
-        _enemyController.EnemyPool.ReturnObjectToPool(_enemyController);
+
+        if (_enemyController.InPool == true)
+        {
+          _enemyController.EnemyPool.ReturnObjectToPool(_enemyController);
+        }
+        else
+        {
+          Destroy(gameObject);
+        }
+
         _enemyController.SpawnerController.RemoveSpawnedEnemy(_enemyController);
 
         EventManager.RaisePlayerHealthIncreased(healthReward);
