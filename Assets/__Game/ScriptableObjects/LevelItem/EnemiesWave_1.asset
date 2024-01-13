@@ -15,4 +15,4 @@ MonoBehaviour:
   <EnemiesLimit>k__BackingField: 5
   <DelayBetweenEnemies>k__BackingField: 1.5
   <EnemiesToSpawn>k__BackingField:
-  - {fileID: 6587124664595022298, guid: 5be0637c314963242b6735b7bb02acad, type: 3}
+  - {fileID: 4863912260562069687, guid: bf73c90d2469fe44aab3fe1efb67aa2d, type: 3}

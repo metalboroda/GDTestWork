@@ -45,17 +45,20 @@ namespace GDTestWork
 
     private Vector3 GetRandomPointInsideCollider()
     {
-      Vector3 randomPoint;
+      Vector3 randomPoint = Vector3.zero;
 
-      do
+      if (_playerController != null)
       {
-        randomPoint = new Vector3(
-            Random.Range(_boxCollider.bounds.min.x, _boxCollider.bounds.max.x),
-            0f,
-            Random.Range(_boxCollider.bounds.min.z, _boxCollider.bounds.max.z)
-        );
-      } while (Vector3.Distance(randomPoint,
-      _playerController.transform.position) < distanceToPlayer);
+        do
+        {
+          randomPoint = new Vector3(
+              Random.Range(_boxCollider.bounds.min.x, _boxCollider.bounds.max.x),
+              0f,
+              Random.Range(_boxCollider.bounds.min.z, _boxCollider.bounds.max.z)
+          );
+        } while (Vector3.Distance(randomPoint,
+              _playerController.transform.position) < distanceToPlayer);
+      }
 
       return randomPoint;
     }
