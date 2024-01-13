@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: <AnimatorSpeed>k__BackingField
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 7773568231088886528, guid: 5be0637c314963242b6735b7bb02acad, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8115132693263251839, guid: 5be0637c314963242b6735b7bb02acad, type: 3}
       propertyPath: m_IsActive
       value: 0

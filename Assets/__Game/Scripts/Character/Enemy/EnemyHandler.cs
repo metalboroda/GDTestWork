@@ -44,6 +44,8 @@ namespace GDTestWork
 
         Death();
       }
+
+      _enemyController.OnHealthChanged(CurrentHealth, MaxHealth);
     }
 
     private void Death()

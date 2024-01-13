@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,6 +6,8 @@ namespace GDTestWork
 {
   public class EnemyController : CharacterControllerBase
   {
+    public event Action<int, int> HealthChanged;
+
     [field: Header("")]
     [field: SerializeField] public EnemyType EnemyType { get; private set; }
 
@@ -41,6 +44,11 @@ namespace GDTestWork
       CapsuleCollider.enabled = true;
       NavMeshAgent.enabled = true;
       EnemyHandler.CurrentHealth = EnemyHandler.MaxHealth;
+    }
+
+    public void OnHealthChanged(int currentHealth, int maxHealth)
+    {
+      HealthChanged?.Invoke(currentHealth, maxHealth);
     }
   }
 }
