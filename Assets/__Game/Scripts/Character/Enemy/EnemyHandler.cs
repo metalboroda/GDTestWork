@@ -1,3 +1,4 @@
+using Lean.Pool;
 using System.Collections;
 using UnityEngine;
 
@@ -11,6 +12,10 @@ namespace GDTestWork
     [Header("Trixter")]
     [SerializeField] private int doppelAmount = 2;
     [SerializeField] private EnemyController doppelPrefab;
+
+    [Header("VFX")]
+    [SerializeField] private VFXHandler spawnVFX;
+    [SerializeField] private VFXHandler destroyVFX;
 
     private CapsuleCollider _capsuleCollider;
 
@@ -30,6 +35,7 @@ namespace GDTestWork
       CurrentHealth = MaxHealth;
 
       StartCoroutine(InvincibilityFrames());
+      SpawnVFX();
     }
 
     public override void Damage(int damage)
@@ -51,6 +57,12 @@ namespace GDTestWork
         SpawnDoppel();
       }
 
+      _enemyController.SpawnerController.RemoveSpawnedEnemy(_enemyController);
+
+      EventManager.RaisePlayerHealthIncreased(healthReward);
+
+      DestroyVFX();
+
       if (_enemyController.InPool == true)
       {
         _enemyController.EnemyPool.ReturnObjectToPool(_enemyController);
@@ -59,10 +71,6 @@ namespace GDTestWork
       {
         Destroy(gameObject);
       }
-
-      _enemyController.SpawnerController.RemoveSpawnedEnemy(_enemyController);
-
-      EventManager.RaisePlayerHealthIncreased(healthReward);
     }
 
     private void SpawnDoppel()
@@ -82,6 +90,20 @@ namespace GDTestWork
       yield return new WaitForSeconds(invincibilityFrames);
 
       _capsuleCollider.enabled = true;
+    }
+
+    private void SpawnVFX()
+    {
+      var spawnedVFX = LeanPool.Spawn(spawnVFX, transform.position, Quaternion.identity);
+
+      spawnedVFX.SpawnInit();
+    }
+
+    private void DestroyVFX()
+    {
+      var spawnedVFX = LeanPool.Spawn(destroyVFX, transform.position, Quaternion.identity);
+
+      spawnedVFX.SpawnInit();
     }
   }
 }

@@ -2827,6 +2827,8 @@ MonoBehaviour:
   healthReward: 25
   doppelAmount: 2
   doppelPrefab: {fileID: 0}
+  spawnVFX: {fileID: 7817685024829945537, guid: b629ac615b28099438a56f1166fae839, type: 3}
+  destroyVFX: {fileID: 8106195243271027726, guid: 47aa2bd9e0792c842b1f95e0653f0226, type: 3}
 --- !u!114 &3521367539050445062
 MonoBehaviour:
   m_ObjectHideFlags: 0
