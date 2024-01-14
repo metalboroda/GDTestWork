@@ -2,6 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace GDTestWork
 {
@@ -12,6 +13,9 @@ namespace GDTestWork
 
     [Header("Game Screen")]
     [SerializeField] private TextMeshProUGUI waveCounterTxt;
+    [SerializeField] private Button restartButton;
+
+    [Inject] private SceneController _sceneController;
 
     private void OnEnable()
     {
@@ -19,10 +23,20 @@ namespace GDTestWork
       EventManager.EnemyWaveChanged += UpdateWaveCounter;
     }
 
+    private void Start()
+    {
+      SubscribeButtons();
+    }
+
     private void OnDisable()
     {
       EventManager.PlayerHealthChanged -= UpdatePlayerHealthBar;
       EventManager.EnemyWaveChanged -= UpdateWaveCounter;
+    }
+
+    private void SubscribeButtons()
+    {
+      restartButton.onClick.AddListener(() => { _sceneController.RestartCurrentScene(); });
     }
 
     private void UpdatePlayerHealthBar(int currentHealth, int maxHealth)
